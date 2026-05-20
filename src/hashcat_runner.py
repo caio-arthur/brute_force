@@ -13,25 +13,24 @@ POTFILE_PATH = os.path.join(BASE_DIR, "potfile", "hashcat.potfile")
 def build_hashcat_command(hash_file_path: str, mask_file_path: str) -> list:
     return [
         HASHCAT_BIN,
-        "-a", "6",
+        "-a", "3",
         "-d", "1",
         "-m", "22000",
         "-w", "3",
         "-O",
         "--potfile-path", POTFILE_PATH,
         hash_file_path,
-        mask_file_path      
+        mask_file_path
     ]
-
 
 def run_mask_attack_with_monitoring(
     hash_file_path: str,
-    mask_args: list,
+    mask_file_path: str,
     on_cracked_callback,
     already_notified: set,
     check_interval_seconds: int = 15
 ) -> int:
-    cmd = build_hashcat_command(hash_file_path, mask_args)
+    cmd = build_hashcat_command(hash_file_path, mask_file_path)
 
     print(f"\n[*] Executando em: {HASHCAT_DIR}")
     print(f"[*] Comando: {' '.join(cmd)}")
