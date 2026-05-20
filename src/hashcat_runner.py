@@ -10,19 +10,17 @@ HASHCAT_BIN = os.path.join(HASHCAT_DIR, "hashcat.exe")
 POTFILE_PATH = os.path.join(BASE_DIR, "potfile", "hashcat.potfile")
 
 
-def build_hashcat_command(hash_file_path: str, mask_args: list) -> list:
+def build_hashcat_command(hash_file_path: str, mask_file_path: str) -> list:
     return [
         HASHCAT_BIN,
-        "-a", "3",
+        "-a", "6",
         "-d", "1",
         "-m", "22000",
         "-w", "3",
         "-O",
         "--potfile-path", POTFILE_PATH,
-        "--status",
-        "--status-timer", "60",
         hash_file_path,
-        *mask_args
+        mask_file_path      
     ]
 
 
